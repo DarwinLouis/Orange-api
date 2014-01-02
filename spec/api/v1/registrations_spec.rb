@@ -7,14 +7,23 @@ describe Api::V1::RegistrationsController, :type => :api do
 
 		it "create new user" do
 
-			post "#{url}.json", {:user => {:email =>'123@yahoo.com', :password => '12345678909'}}
+			post "#{url}.json", {:user => {:email =>'123@yahoo.com', 
+								:password => '12345678909',
+								:full_name => 'Bernard Tolosa',
+								:user_name => 'bt',
+								:mobile_no => '09129383743',
+								:old_card_no => '00923834974'}}
 
 			user = User.find_by_email('123@yahoo.com')
 
 			response.status.should eql(201)
 
 			result = {:success => true, 
-					:data => user, 
+					:email => user.email,
+					:mobile_no => user.mobile_no,
+					:user_name => user.user_name,
+					:full_name => user.full_name,
+					:old_card_no => user.old_card_no,
 					:auth_token => user.authentication_token}
 
 			response.body.should eql(result.to_json)

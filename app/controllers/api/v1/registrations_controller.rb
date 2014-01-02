@@ -5,7 +5,11 @@ class Api::V1::RegistrationsController < ApplicationController
 		user = User.new(user_params)
 		if user.save
 			render :json => {:success => true,
-							:data => user,
+							:email => user.email,
+							:mobile_no => user.mobile_no,
+							:user_name => user.user_name,
+							:full_name => user.full_name,
+							:old_card_no => user.old_card_no,
 							:auth_token => user.authentication_token},
 							:status => 201
 		else
@@ -16,6 +20,6 @@ class Api::V1::RegistrationsController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:email,:password)
+		params.require(:user).permit(:email,:password,:user_name,:mobile_no,:full_name,:old_card_no)
 	end
 end
