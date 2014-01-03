@@ -42,4 +42,12 @@ describe Api::V1::RegistrationsController, :type => :api do
 
 		end
 	end
+
+	context "Update User Registration" do
+		let(:url) {"/api/v1/registrations"}
+		it "Successfull update" do 
+  
+		end
+	end
+
 end
