@@ -1,6 +1,6 @@
 class Api::V1::RegistrationsController < ApplicationController
 	skip_before_filter :verify_authenticity_token
-	before_filter :authenticate_user!, :except => [:create, :destroy]
+	before_filter :authenticate_user!, :except => [:create]
 
 	def create
 		user = User.new(user_params)
