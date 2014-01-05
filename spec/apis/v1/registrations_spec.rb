@@ -22,6 +22,7 @@ describe Api::V1::RegistrationsController, :type => :api do
 			last_response.status.should eql(201)
 
 			result = {:success => true, 
+					:id => user.id,
 					:email => user.email,
 					:mobile_no => user.mobile_no,
 					:user_name => user.user_name,
@@ -46,11 +47,5 @@ describe Api::V1::RegistrationsController, :type => :api do
 		end
 	end
 
-	context "Update User Registration" do
-		let(:url) {"/api/v1/registrations"}
-		it "Successfull update" do 
-  
-		end
-	end
 
 end

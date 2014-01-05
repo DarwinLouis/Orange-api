@@ -6,6 +6,7 @@ class Api::V1::RegistrationsController < ApplicationController
 		user = User.new(user_params)
 		if user.save
 			render :json => {:success => true,
+							:id => user.id,
 							:email => user.email,
 							:mobile_no => user.mobile_no,
 							:user_name => user.user_name,

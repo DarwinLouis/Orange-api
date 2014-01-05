@@ -5,14 +5,17 @@ class Api::V1::SessionsController < ApplicationController
 
 		user = User.find_for_database_authentication(:email => params[:email])
 
+		return invalid_login_attemp unless user
+
 		if user.valid_password?(params[:password])
 			
 			sign_in(:user,user)
 
 			render :json => {:success => true,
 							:access_token => user.authentication_token,
-							:token_type => "bearer"
-							}
+							:token_type => "bearer",
+							:user => {:id => user.id}
+							},status => 200
 			return
 		end
 		invalid_login_attemp
