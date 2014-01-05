@@ -10,6 +10,9 @@ class Api::V1::UsersController < ApplicationController
 												:email => user.email,
 												:mobile_no => user.mobile_no,
 												:user_name => user.user_name,
+												:marital_status => user.marital_status,
+												:address => user.address,
+												:birth_date => user.birth_date,
 												:old_card_no => user.old_card_no}}, :status => 201
 		else
 			render :json => user.errors 
@@ -19,7 +22,7 @@ class Api::V1::UsersController < ApplicationController
 
 	private
 	def user_param
-		params.require(:user).permit(:email,:password,:user_name,:mobile_no,:full_name,:old_card_no)
+		params.require(:user).permit(:email,:password,:user_name,:mobile_no,:full_name,:old_card_no,:marital_status,:address,:birth_date)
 	end
 
 	def invalid

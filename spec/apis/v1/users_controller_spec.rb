@@ -19,6 +19,9 @@ describe Api::V1::UsersController, :type => :api do
 						:email=>'newemail@yahoo.com',
 						:mobile_no => '00998887',
 						:user_name => 'newbt', 
+						:marital_status => 'update',
+						:address => 'updated address',
+						:birth_date => 'update',
 						:old_card_no => 'updated'
 					}
 
@@ -31,6 +34,9 @@ describe Api::V1::UsersController, :type => :api do
 												:email => user.email,
 												:mobile_no => user.mobile_no,
 												:user_name => user.user_name,
+												:marital_status => user.marital_status,
+												:address => user.address,
+												:birth_date => user.birth_date,
 												:old_card_no => user.old_card_no}}
 
 			last_response.body.should eql(expected.to_json)
