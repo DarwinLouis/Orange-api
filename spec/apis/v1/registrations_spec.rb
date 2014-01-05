@@ -15,7 +15,10 @@ describe Api::V1::RegistrationsController, :type => :api do
 								:full_name => 'Bernard Tolosa',
 								:user_name => 'bt',
 								:mobile_no => '09129383743',
-								:old_card_no => '00923834974'}}
+								:old_card_no => '00923834974',
+								:marital_status => 'single',
+								:address => 'naga',
+								:birth_date => '1/2/2'}}
 
 			user = User.find_by_email('123@yahoo.com')
 
@@ -28,6 +31,9 @@ describe Api::V1::RegistrationsController, :type => :api do
 					:user_name => user.user_name,
 					:full_name => user.full_name,
 					:old_card_no => user.old_card_no,
+					:marital_status => user.marital_status,
+					:address => user.address,
+					:birth_date => user.birth_date,
 					:auth_token => user.authentication_token}
 
 			last_response.body.should eql(result.to_json)

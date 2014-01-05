@@ -12,6 +12,9 @@ class Api::V1::RegistrationsController < ApplicationController
 							:user_name => user.user_name,
 							:full_name => user.full_name,
 							:old_card_no => user.old_card_no,
+							:marital_status => user.marital_status,
+							:address => user.address,
+							:birth_date => user.birth_date,
 							:auth_token => user.authentication_token},
 							:status => 201
 		else
@@ -22,6 +25,6 @@ class Api::V1::RegistrationsController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:email,:password,:user_name,:mobile_no,:full_name,:old_card_no)
+		params.require(:user).permit(:email,:password,:user_name,:mobile_no,:full_name,:old_card_no,:marital_status,:address,:birth_date)
 	end
 end
