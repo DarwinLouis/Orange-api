@@ -1,5 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
-	before_filter :authenticate_user!, :except => [:create, :destroy]
+	skip_before_filter :verify_authenticity_token!
+	before_filter :authenticate_user! , :except => [:create, :destroy]
 
 	def create
 
@@ -15,7 +16,7 @@ class Api::V1::SessionsController < ApplicationController
 							:access_token => user.authentication_token,
 							:token_type => "bearer",
 							:user => {:id => user.id}
-							},status => 200
+							},:status => 201
 			return
 		end
 		invalid_login_attemp

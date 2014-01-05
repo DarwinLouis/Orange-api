@@ -7,6 +7,7 @@ OrangeApi::Application.routes.draw do
 		devise_scope :user do
 			post 'registrations' => 'registrations#create', :as => 'register'
 			post 'sessions' => 'sessions#create', :as => 'login'
+			put 'registrations' => 'users#update', :as => 'update_register'
 			delete 'sessions' => 'sessions#destroy', :as => 'logout'
 		end
 	end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::V1::RegistrationsController, :type => :api do
 	before :each do
-		sign_in_as_a_valid_user
+		#sign_in_as_a_valid_user
 	end
 	context "Register User" do
 
