@@ -10,7 +10,9 @@ class ApplicationController < ActionController::API
 	def authenticate_user_from_token!
 		Rails.logger.info params
 
+
 		auth_token = request.env['HTTP_AUTHORIZATION']
+
 
 		user = User.find_by_authentication_token(auth_token)
 
