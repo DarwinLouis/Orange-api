@@ -25,7 +25,7 @@ describe Api::V1::RegistrationsController, :type => :api do
 			last_response.status.should eql(201)
 
 			result = {:success => true, 
-					:id => user.id,
+					:user =>{:id => user.id,
 					:email => user.email,
 					:mobile_no => user.mobile_no,
 					:user_name => user.user_name,
@@ -33,7 +33,7 @@ describe Api::V1::RegistrationsController, :type => :api do
 					:old_card_no => user.old_card_no,
 					:marital_status => user.marital_status,
 					:address => user.address,
-					:birth_date => user.birth_date,
+					:birth_date => user.birth_date},
 					:auth_token => user.authentication_token}
 
 			last_response.body.should eql(result.to_json)

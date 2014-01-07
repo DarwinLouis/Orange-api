@@ -16,7 +16,6 @@ describe Api::V1::UsersController, :type => :api do
 			param = {
 						:id => @user.id,
 						:full_name => 'updated',
-						:email=>'newemail@yahoo.com',
 						:mobile_no => '00998887',
 						:user_name => 'newbt', 
 						:marital_status => 'update',
