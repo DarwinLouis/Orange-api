@@ -11,12 +11,13 @@ describe Api::V1::VouchersController, :type => :api do
 
 	it "successfully create new vouchers" do
 
-		post "#{url}.json", {:voucher => {:item_id => 1, :user_id => 1}}, sign_in_as_a_valid_user
+		post "#{url}.json", {:voucher => {:claim_id => 'xyz', :item_id => 1, :user_id => 1}}, sign_in_as_a_valid_user
 
 		voucher = Voucher.find_by item_id: 1 
 
 		expect = {:success => true, :voucher => {
 						:id => voucher.id,
+						:claim_id => voucher.claim_id,
 						:claim_code => voucher.claim_code,
 						:item_id => voucher.item_id,
 						:user_id => voucher.user_id}}

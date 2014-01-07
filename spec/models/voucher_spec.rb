@@ -22,7 +22,8 @@ describe Voucher do
 		voucher.claim_code.should_not eql(nil)
 	end
 
+	it "is invalid without a claim id" do
+		build(:voucher, claim_id:nil).should_not be_valid
 	end
-
-
+	end
 end
