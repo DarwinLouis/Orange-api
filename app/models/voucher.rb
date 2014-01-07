@@ -5,11 +5,16 @@ class Voucher < ActiveRecord::Base
 	validates_presence_of :user_id, :item_id
 
 	def insure_claim_code
-		self.claim_code = generate_claim_code 
+		if claim_code.blank?
+			self.claim_code = generate_claim_code 
+		end
 	end
 
 	def generate_claim_code
-		SecureRandom.hex(10)
+		loop do
+			code = SecureRandom.hex(5)
+			break code unless Voucher.where(claim_code: code).first
+		end
 	end
 
 end

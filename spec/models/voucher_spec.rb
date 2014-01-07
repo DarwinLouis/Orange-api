@@ -4,8 +4,7 @@ describe Voucher do
 	
 	context "Voucher Creation" do
 
-		let(:voucher) { create(:voucher) }
-
+	let(:voucher) { create(:voucher) }
 
 	it "has a valid factory" do
 		voucher.should be_valid

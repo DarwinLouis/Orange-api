@@ -1,3 +1,3 @@
 class VoucherSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :claim_code
 end

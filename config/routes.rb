@@ -15,6 +15,9 @@ OrangeApi::Application.routes.draw do
 				put 'reset_password'
 			end
 		end
+
+		resources :vouchers
+
 	end
   end
 
