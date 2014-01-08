@@ -12,6 +12,8 @@ gem 'active_model_serializers'
 
 gem 'devise'
 
+gem "paperclip", "~> 3.0"
+
 group :development, :test do
 	gem 'rspec-rails'
 	gem 'factory_girl_rails','~> 4.0'
