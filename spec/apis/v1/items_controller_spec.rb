@@ -46,8 +46,6 @@ describe Api::V1::ItemsController , :type => :api do
 
 			result = JSON.parse(last_response.body)
 
-			puts result
-
 			result['items'].length.should eql(2)
 
 		end

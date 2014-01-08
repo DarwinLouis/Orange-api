@@ -18,6 +18,7 @@ OrangeApi::Application.routes.draw do
 
 		resources :vouchers
 		resources :items
+		resource :feedbacks
 
 	end
   end
