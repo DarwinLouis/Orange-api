@@ -20,6 +20,7 @@ OrangeApi::Application.routes.draw do
 		resources :vouchers
 		resources :items
 		resource :feedbacks
+		get 'memberships/:id' => 'memberships#show', :as => 'membership'
 
 	end
   end
