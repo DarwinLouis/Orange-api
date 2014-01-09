@@ -19,7 +19,7 @@ describe Api::V1::SessionsController, :type => :api do
 			last_response.status.should eql(201)
 
 			result = {:success => true, :access_token => @user.authentication_token,:token_type => 'bearer', 
-						:user => {:id => @user.id}}.to_json
+						:user => {:id => @user.id, :full_name => @user.full_name}}.to_json
 		
 			last_response.body.should eql(result)
 

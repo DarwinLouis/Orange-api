@@ -5,7 +5,7 @@ class Membership < ActiveRecord::Base
 	belongs_to :user
 	
 	def validate_expiration_date
-		self.expiration_date = Date.today
+		self.expiration_date = DateTime.now + 12.month
 	end
 
 	def generate_code_number

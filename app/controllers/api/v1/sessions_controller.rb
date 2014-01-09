@@ -15,7 +15,7 @@ class Api::V1::SessionsController < ApplicationController
 			render :json => {:success => true,
 							:access_token => user.authentication_token,
 							:token_type => "bearer",
-							:user => {:id => user.id}
+							:user => {:id => user.id, :full_name => user.full_name}
 							},:status => 201
 			return
 		end

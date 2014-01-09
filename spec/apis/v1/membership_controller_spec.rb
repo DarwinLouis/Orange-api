@@ -9,7 +9,10 @@ describe Api::V1::MembershipsController , :type => :api do
 
 		last_response.status.should eql(201)
 
-		expect = {:success=> true, :membership => membership}.to_json
+		expect = {:success=> true, :membership => {:full_name => membership.user.full_name, 
+													:member_since => membership.created_at.strftime('%m/%d/%Y'),
+													:expiration_date => membership.expiration_date.strftime('%m/%d/%Y'),
+													:card_no => membership.card_no}}.to_json
 
 		last_response.body.should eql(expect)
 
