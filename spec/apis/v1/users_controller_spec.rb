@@ -43,6 +43,29 @@ describe Api::V1::UsersController, :type => :api do
 			last_response.status.should eql(201)
 			
 		end
+
+		it "successfully get one user" do
+
+			user = create(:user)
+
+			get "#{url + '/' + "#{user.id}"}.json", {}, sign_in_as_a_valid_user
+
+			expect = {:success => true, :user=> {:id => user.id, 
+												:full_name => user.full_name,
+												:address => user.address,
+												:birth_date => user.birth_date,
+												:email => user.email,
+												:marital_status => user.marital_status,
+												:mobile_no =>user.mobile_no,
+												:old_card_no => user.old_card_no}}
+
+			result = last_response.body
+
+			result.should eql(expect.to_json)
+
+			last_response.status.should eql(201)
+
+		end
 		
 	end
 end

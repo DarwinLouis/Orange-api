@@ -1,5 +1,23 @@
 class Api::V1::UsersController < ApplicationController
 
+	def show
+		user = User.find(params[:id])
+		if user
+			
+			render :json => {:success => true, :user=> {:id => user.id, 
+												:full_name => user.full_name,
+												:address => user.address,
+												:birth_date => user.birth_date,
+												:email => user.email,
+												:marital_status => user.marital_status,
+												:mobile_no =>user.mobile_no,
+												:old_card_no => user.old_card_no}}, :status => 201
+			
+		else
+			render :json => {:errors => user.errors}, :status => 402
+		end
+	end
+
 	def update
 		user = User.find_by_id(params[:user][:id]) 
 
