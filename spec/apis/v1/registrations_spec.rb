@@ -24,6 +24,8 @@ describe Api::V1::RegistrationsController, :type => :api do
 
 			last_response.status.should eql(201)
 
+			user.membership.card_no.should_not eql(nil)
+
 			result = {:success => true, 
 					:user =>{:id => user.id,
 					:email => user.email,
@@ -34,8 +36,9 @@ describe Api::V1::RegistrationsController, :type => :api do
 					:marital_status => user.marital_status,
 					:address => user.address,
 					:birth_date => user.birth_date},
-					:auth_token => user.authentication_token}
-
+					:membership => {:expiration_date => user.membership.expiration_date},
+					:auth_token => user.authentication_token }
+			
 			last_response.body.should eql(result.to_json)
 
 		end

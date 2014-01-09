@@ -11,6 +11,5 @@ FactoryGirl.define do
 		mobile_no "09198789"
 		old_card_no "xx-yy-zz"
 		user_name "bt"
-
 	end
 end

@@ -3,24 +3,30 @@ class Api::V1::RegistrationsController < ApplicationController
 	before_filter :authenticate_user!, :except => [:create]
 
 	def create
+
 		user = User.new(user_params)
+
+		user.membership = Membership.new
+
 		if user.save
-			render :json => {:success => true,
-							:user => {:id => user.id,
-							:email => user.email,
-							:mobile_no => user.mobile_no,
-							:user_name => user.user_name,
-							:full_name => user.full_name,
-							:old_card_no => user.old_card_no,
-							:marital_status => user.marital_status,
-							:address => user.address,
-							:birth_date => user.birth_date},
-							:auth_token => user.authentication_token},
-							:status => 201
+			render :json => {:success => true, 
+					:user =>{:id => user.id,
+					:email => user.email,
+					:mobile_no => user.mobile_no,
+					:user_name => user.user_name,
+					:full_name => user.full_name,
+					:old_card_no => user.old_card_no,
+					:marital_status => user.marital_status,
+					:address => user.address,
+					:birth_date => user.birth_date},
+					:membership => {:expiration_date => user.membership.expiration_date},
+					:auth_token => user.authentication_token }, :status => 201
+
 		else
 			warden.custom_failure!
 			render :json=> user.errors, :status=>422
 		end
+
 	end
 
 	private
