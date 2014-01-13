@@ -35,10 +35,11 @@ describe Api::V1::PromosController, :type => :api do
 		get @url , {}, sign_in_as_a_valid_user
 
 		last_response.status.should eql(200)
-		
+	
+
 		result = JSON.parse(last_response.body)
 
-		result.length.should eql(1)
+		result['promos'].length.should eql(2)
 
 	end
 end
