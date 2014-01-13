@@ -1,4 +1,9 @@
 class Api::V1::PromosController < ApplicationController
+
+	def show
+		render :json => Promo.all
+	end
+
 	def create
 		promo = Promo.new(promo_param)
 

@@ -1,11 +1,14 @@
 require 'spec_helper'
 
 describe Api::V1::PromosController, :type => :api do
+
+	before :each do
+		@url = "/api/v1/promos"
+	end
 	context "create" do
-		let(:url) {"/api/v1/promos"}
 
 		it "successfull save" do
-			post "#{url}.json", {:promo => {:name => 'cool name',:description => 'some long description', :branch_id => 1}}, sign_in_as_a_valid_user 
+			post @url, {:promo => {:name => 'cool name',:description => 'some long description', :branch_id => 1}}, sign_in_as_a_valid_user 
 
 			result = Promo.find_by name: 'cool name'
 
@@ -18,10 +21,24 @@ describe Api::V1::PromosController, :type => :api do
 
 		it "return 402 with missing parameter" do
 			
-			post "#{url}.json", {:promo => {:name => ''}}, sign_in_as_a_valid_user 
+			post @url, {:promo => {:name => ''}}, sign_in_as_a_valid_user 
 
 			last_response.status.should eql(402)
 		
 		end
+	end
+
+	it "return list of promos" do
+
+		2.times {create(:promo)}
+
+		get @url , {}, sign_in_as_a_valid_user
+
+		last_response.status.should eql(200)
+		
+		result = JSON.parse(last_response.body)
+
+		result.length.should eql(1)
+
 	end
 end
