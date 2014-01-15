@@ -18,7 +18,10 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'factory_girl_rails','~> 4.0'
 	gem 'shoulda'
+	gem "guard-rspec"
+	gem 'mailcatcher'
 end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

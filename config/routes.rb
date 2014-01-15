@@ -11,9 +11,10 @@ OrangeApi::Application.routes.draw do
 			get 'registrations/:id' => 'users#show', :as => 'user'
 			delete 'sessions' => 'sessions#destroy', :as => 'logout'
 		end
-		resources :passwords, only: [:put] do
+		resources :passwords, only: [:put,:post] do
 			collection do 
 				put 'reset_password'
+				post 'request_reset'
 			end
 		end
 

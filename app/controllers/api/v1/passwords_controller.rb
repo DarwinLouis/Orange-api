@@ -1,5 +1,11 @@
 class Api::V1::PasswordsController < ApplicationController 
 
+	def request_reset
+		user = User.find_by_email(params[:email])
+		user.send_password_reset if user
+		render :json => {:success => true}, :status => 201
+	end
+
 	def reset_password
 		user = User.find(params[:user][:id])
 
