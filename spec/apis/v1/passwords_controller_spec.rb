@@ -23,9 +23,9 @@ describe Api::V1::PasswordsController, :type => :api do
 
 		post "/api/v1/passwords/request_reset", {:email => "nobody@example.com"}, sign_in_as_a_valid_user
 
-		result = {:success => true}
+		result = {:success => false}
 
-		last_response.status.should eql(201)
+		last_response.status.should eql(402)
 		last_response.body.should eql(result.to_json)
 
 		last_email.should be_nil 
