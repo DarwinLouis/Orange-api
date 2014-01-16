@@ -87,9 +87,12 @@ GEM
       skinny (>= 0.1.2)
       sqlite3-ruby
       thin
+    metaclass (0.0.2)
     method_source (0.8.2)
     mime-types (1.25.1)
     minitest (4.7.5)
+    mocha (1.0.0)
+      metaclass (~> 0.0.1)
     multi_json (1.8.2)
     orm_adapter (0.5.0)
     paperclip (3.5.2)
@@ -196,6 +199,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   guard-rspec
   mailcatcher
+  mocha
   paperclip (~> 3.0)
   pg
   rails (= 4.0.2)

@@ -23,6 +23,7 @@ OrangeApi::Application.routes.draw do
 		resource :feedbacks
 		get 'memberships/:id' => 'memberships#show', :as => 'membership'
 		resource :promos
+		resource :credits, :only => [:create]
 
 	end
   end

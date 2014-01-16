@@ -3,6 +3,7 @@ class Membership < ActiveRecord::Base
 	
 	validates_presence_of :user_id 
 	belongs_to :user
+	has_many :credits
 	
 	def validate_expiration_date
 		self.expiration_date = DateTime.now + 12.month

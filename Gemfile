@@ -20,6 +20,7 @@ group :development, :test do
 	gem 'shoulda'
 	gem "guard-rspec"
 	gem 'mailcatcher'
+	gem 'mocha'
 end
 
 
