@@ -5,6 +5,10 @@ class Credit < ActiveRecord::Base
 	belongs_to :membership
 
 	def compute_point
-		self.point = amount / 50
+		self.point = amount / 5
+	end
+
+	def self.total_points(points)
+		points.sum(:point)
 	end
 end

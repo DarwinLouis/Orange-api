@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Api::V1::CreditsController, :type => :api do
 	
+	
 	describe "#crete" do
 		
 		let(:url) {"api/v1/credits"}
@@ -37,6 +38,35 @@ describe Api::V1::CreditsController, :type => :api do
 
 		end
 
+	end
+
+	describe "#show" do
+
+		let(:membership) { create(:membership) }
+
+		it "successfully get the aggregate credits " do
+
+			2.times { create(:credit, membership_id: membership.id)}
+
+			get "/api/v1/credits/#{membership.id}", {}, sign_in_as_a_valid_user
+
+			result = Credit.where(membership_id: membership.id).sum(:point)
+
+			expect = {:success => true, :points => {:total => result}}
+
+			last_response.body.should eql(expect.to_json)
+
+		end
+		
+		it "does not successfully get the aggregate credits with invalid membership" do
+
+			2.times { create(:credit, membership_id: membership.id)}
+
+			get "/api/v1/credits/someinvalid", {}, sign_in_as_a_valid_user
+
+			last_response.status.should eql(402)
+			
+		end
 
 	end
 
