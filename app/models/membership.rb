@@ -12,4 +12,8 @@ class Membership < ActiveRecord::Base
 	def generate_code_number
 		self.card_no = SecureRandom.hex(8) 
 	end
+
+	def total_points
+		self.credits.sum(:point)
+	end
 end

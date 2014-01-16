@@ -13,6 +13,12 @@ describe Membership do
 		#member.card_no.length.should eql(15)
 		member.user.should_not eql(nil)
 	end
+
+	it "should compute total points" do
+		member = create(:membership)
+
+		member.total_points.should_not eql(nil)
+	end
 	
 	it { should belong_to(:user) }
 

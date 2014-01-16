@@ -1,11 +1,10 @@
 class Api::V1::CreditsController < ApplicationController
 
 	def show
-		result = Credit.where(membership_id: params[:id])
-		if !result.empty?
-			render :json => {:success => true, :points=> {:total => Credit.total_points(result)}}
-		else
-			render :json => {:success => false}, :status => 402
+		membership = Membership.find_by_id(params[:id])
+		return invalid_param unless membership
+		if membership
+			render :json => {:success => true, :points=> {:total => membership.total_points}}
 		end
 	end
 
@@ -14,7 +13,7 @@ class Api::V1::CreditsController < ApplicationController
 		if credit.save
 			render :json => {:success => true, :credit => credit}, :status => 201
 		else
-			render :json => {:errors => credit.errors}, :status => 402
+			invalid_param
 		end
 	end
 	
@@ -22,5 +21,9 @@ class Api::V1::CreditsController < ApplicationController
 
 	def credit_param
 		params.required(:credit).permit(:reference_no, :membership_id, :branch_id, :amount)
+	end
+
+	def invalid_param
+		render :json => {:success => false}, :status => 402
 	end
 end

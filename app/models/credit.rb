@@ -8,7 +8,4 @@ class Credit < ActiveRecord::Base
 		self.point = amount / 5
 	end
 
-	def self.total_points(points)
-		points.sum(:point)
-	end
 end

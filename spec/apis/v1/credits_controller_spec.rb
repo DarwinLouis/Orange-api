@@ -60,9 +60,7 @@ describe Api::V1::CreditsController, :type => :api do
 		
 		it "does not successfully get the aggregate credits with invalid membership" do
 
-			2.times { create(:credit, membership_id: membership.id)}
-
-			get "/api/v1/credits/someinvalid", {}, sign_in_as_a_valid_user
+			get "/api/v1/credits/400", {}, sign_in_as_a_valid_user
 
 			last_response.status.should eql(402)
 			
