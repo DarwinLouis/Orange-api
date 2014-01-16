@@ -48,7 +48,7 @@ describe Api::V1::CreditsController, :type => :api do
 
 			2.times { create(:credit, membership_id: membership.id)}
 
-			get "/api/v1/credits/#{membership.id}", {}, sign_in_as_a_valid_user
+			get "/api/v1/credits/#{membership.user_id}", {}, sign_in_as_a_valid_user
 
 			result = Credit.where(membership_id: membership.id).sum(:point)
 

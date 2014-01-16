@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Api::V1::SessionsController, :type => :api do
 
 	before :each do
-		@user ||= create(:user)
+		@user ||= create(:user, membership:create(:membership))
 	end
 
 	context "Sign in" do
@@ -19,7 +19,8 @@ describe Api::V1::SessionsController, :type => :api do
 			last_response.status.should eql(201)
 
 			result = {:success => true, :access_token => @user.authentication_token,:token_type => 'bearer', 
-						:user => {:id => @user.id, :full_name => @user.full_name}}.to_json
+						:user => {:id => @user.id, :full_name => @user.full_name},
+						:membership => {:id => @user.membership.id}}.to_json
 		
 			last_response.body.should eql(result)
 

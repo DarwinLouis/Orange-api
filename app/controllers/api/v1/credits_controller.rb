@@ -1,7 +1,7 @@
 class Api::V1::CreditsController < ApplicationController
 
 	def show
-		membership = Membership.find_by_id(params[:id])
+		membership = Membership.find_by_user_id(params[:id])
 		return invalid_param unless membership
 		if membership
 			render :json => {:success => true, :points=> {:total => membership.total_points}}
