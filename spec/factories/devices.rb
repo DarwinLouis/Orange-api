@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :device do
-    os_type ""
+    os_type "type"
     key "MyString"
   end
 end

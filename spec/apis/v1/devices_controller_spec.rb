@@ -12,7 +12,7 @@ describe Api::V1::DevicesController, :type => :api do
 			
 			expect = {:success => true}.to_json
 
-			device = Device.find_by key: 'somekey'
+			device = Device.find_by_key('somekey')
 
 			device.should_not eql(nil)
 			device.key.should eql('somekey')
@@ -25,6 +25,16 @@ describe Api::V1::DevicesController, :type => :api do
 		it "should not successfully create a new device with invalid parameter" do
 
 			post "#{url}.json", {:device => {:key => ''}}, sign_in_as_a_valid_user
+
+			last_response.status.should eql(402)
+
+		end
+
+		it "should not successfully create with already existing key" do
+
+			device = create(:device)
+
+			post "#{url}.json", {:device => {:key => device.key, :os_type => device.os_type}}, sign_in_as_a_valid_user
 
 			last_response.status.should eql(402)
 
