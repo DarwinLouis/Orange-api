@@ -24,6 +24,7 @@ OrangeApi::Application.routes.draw do
 		get 'memberships/:id' => 'memberships#show', :as => 'membership'
 		resource :promos
 		resources :credits, :only => [:create, :show]
+		resources :devices, :only => [:create]
 
 	end
   end
