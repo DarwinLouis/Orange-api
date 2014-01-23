@@ -5,6 +5,6 @@ FactoryGirl.define do
     expiration_date "2014-01-09 13:09:57"
     card_no "MyString"
     user_id 1
-	association :user, factory: :user
+		association :user, factory: :user
   end
 end

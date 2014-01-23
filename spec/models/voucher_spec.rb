@@ -25,5 +25,13 @@ describe Voucher do
 	it "is invalid without a claim id" do
 		build(:voucher, claim_id:nil).should_not be_valid
 	end
+
+	it "should generate 1 month expiration data" do
+		voucher = create(:voucher, expiration_date: nil)
+
+		voucher.expiration_date.should_not eql(nil)
+
+	end
+
 	end
 end

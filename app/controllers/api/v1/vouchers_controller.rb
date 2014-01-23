@@ -13,6 +13,7 @@ class Api::V1::VouchersController < ApplicationController
 							:claim_id => voucher.claim_id,
 							:claim_code => voucher.claim_code, 
 							:item_id => voucher.item_id,
+							:expiration_date => voucher.expiration_date.strftime('%m/%d/%Y'),
 							:user_id => voucher.user_id}}, :status => 201
 		else
 			render :json => {:errors => voucher.errors}, :status => 402

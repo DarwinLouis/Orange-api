@@ -19,7 +19,8 @@ describe Api::V1::VouchersController, :type => :api do
 						:id => voucher.id,
 						:claim_id => voucher.claim_id,
 						:claim_code => voucher.claim_code,
-						:item_id => voucher.item_id,
+						:item_id => voucher.item_id, 
+						:expiration_date => voucher.expiration_date.strftime('%m/%d/%Y'),
 						:user_id => voucher.user_id}}
 
 		last_response.status.should eql(201)
