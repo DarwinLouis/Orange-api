@@ -25,6 +25,11 @@ OrangeApi::Application.routes.draw do
 		resource :promos
 		resources :credits, :only => [:create, :show]
 		resources :devices, :only => [:create]
+		resources :branch, :only => [:create, :index] do
+			collection do 
+				get 'search', :to => 'branch#show'  
+			end
+		end
 
 	end
   end
