@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
 	before_save :create_url
-	validates_presence_of :name, :point, :branch,  :image
+	#validates_presence_of :name, :point, :branch,  :image
+	validates_presence_of :name, :point, :branch
 	has_attached_file :image, :path => ":rails_root/public/catalog/:filename"
 
 	def create_url

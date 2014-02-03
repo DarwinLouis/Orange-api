@@ -14,6 +14,8 @@ gem 'devise'
 
 gem "paperclip", "~> 3.0"
 
+gem 'geocoder'
+
 group :development, :test do
 	gem 'rspec-rails'
 	gem 'factory_girl_rails','~> 4.0'
