@@ -20,7 +20,11 @@ describe Api::V1::SessionsController, :type => :api do
 
 			result = {:success => true, :access_token => @user.authentication_token,:token_type => 'bearer', 
 						:user => {:id => @user.id, :full_name => @user.full_name},
-						:membership => {:id => @user.membership.id}}.to_json
+						:membership => {:id => @user.membership.id, 
+								:name=>@user.membership.user.full_name, 
+								:card_number=>@user.membership.card_no,
+								:member_since => @user.membership.created_at.strftime('%m/%d/%Y'),
+								:expiration_date => membership.expiration_date.strftime('%m/%d/%Y')}}.to_json
 		
 			last_response.body.should eql(result)
 
@@ -37,4 +41,5 @@ describe Api::V1::SessionsController, :type => :api do
 			
 		end
 	end
+	
 end
