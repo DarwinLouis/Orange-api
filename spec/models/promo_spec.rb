@@ -12,4 +12,6 @@ describe Promo do
 	it "it invalid without branch_id" do
 		build(:promo, branch_id: nil).should_not be_valid
 	end
+	it { should belong_to(:branch) }
+
 end

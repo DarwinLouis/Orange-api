@@ -22,12 +22,16 @@ OrangeApi::Application.routes.draw do
 		resources :items
 		resource :feedbacks
 		get 'memberships/:id' => 'memberships#show', :as => 'membership'
-		resource :promos
+		resource :promos do
+			collection do
+				get 'branches/:id', :to => 'promos#branch'
+			end
+		end
 		resources :credits, :only => [:create, :show]
 		resources :devices, :only => [:create]
-		resources :branch, :only => [:create, :index] do
+		resources :branches, :only => [:create, :update, :index, :destroy, :show] do
 			collection do 
-				get 'search', :to => 'branch#show'  
+				get 'search', :to => 'branches#search'  
 			end
 		end
 

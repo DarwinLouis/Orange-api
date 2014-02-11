@@ -42,4 +42,22 @@ describe Api::V1::PromosController, :type => :api do
 		result['promos'].length.should eql(2)
 
 	end
+	it "returns all promos within branches" do
+
+		branch = create(:branch)
+		
+		2.times {create(:promo, branch_id:branch.id)}
+
+		url = "/api/v1/promos/branches/#{branch.id}"
+
+		get "#{url}.json", {} , sign_in_as_a_valid_user 
+
+		last_response.status.should eql(200)
+
+
+		result = JSON.parse(last_response.body)
+
+		result['promos'].length.should eql(2)
+
+	end
 end

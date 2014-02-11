@@ -13,6 +13,10 @@ class Api::V1::PromosController < ApplicationController
 			render :json => {:success => false, :errors => promo.errors}, :status => 402
 		end
 	end
+
+	def branch
+		render :json => Promo.where(:branch_id => params[:id])
+	end
 	
 	private
 	

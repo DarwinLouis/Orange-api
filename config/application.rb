@@ -21,5 +21,13 @@ module OrangeApi
     # config.i18n.default_locale = :de
 	config.i18n.enforce_available_locales = false
 	config.secret_key_base = 'blipblapblup'
+
+		config.middleware.use Rack::Cors do
+			allow do
+				origins '*'
+				resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
+				end
+		end
+
   end
 end
