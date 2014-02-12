@@ -14,7 +14,7 @@ FactoryGirl.define do
     description "MyString"
     point 1
     image_path "MyString"
-	image {} 
-	branch 'someBranch'
+		image {} 
+		branch 'someBranch'
   end
 end

@@ -12,15 +12,31 @@ describe Api::V1::ItemsController , :type => :api do
 	context "create" do
 		it "successfully save new item" do
 
-			post "#{url}.json", {:item => {:image => @image ,:name => 'item 1', :point => 100, :branch => 'branch'}}, sign_in_as_a_valid_user
+			post "#{url}.json", {:image => @image ,:name => 'item 1', :point => 100, :branch => 'branch'}, sign_in_as_a_valid_user
 
 			item = Item.find_by name: 'item 1'
 
-			result = {:success => true, :item => item}
+			result = {:item => item}
 
 			last_response.body.should eql(result.to_json)
 
 			last_response.status.should eql(201)
+
+		end
+
+		it "successfully update item" do 
+
+			item = create(:item, image: @image)
+
+			put "#{url}/#{item.id}.json", {:image => @image ,:name => 'update', :point => 100, :branch => 'branch'}, sign_in_as_a_valid_user
+
+			item = Item.find(item.id)
+
+			item.name.should eql('update')
+			item.point.should eql(100)
+			item.branch.should eql('branch')
+
+			last_response.status.should eql(200)
 
 		end
 
@@ -42,7 +58,7 @@ describe Api::V1::ItemsController , :type => :api do
 
 			get "#{url}.json", {}, sign_in_as_a_valid_user
 
-			last_response.status.should eql(201)
+			last_response.status.should eql(200)
 
 			result = JSON.parse(last_response.body)
 
