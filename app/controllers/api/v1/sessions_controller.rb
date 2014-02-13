@@ -16,7 +16,11 @@ class Api::V1::SessionsController < ApplicationController
 							:access_token => user.authentication_token,
 							:token_type => "bearer",
 							:user => {:id => user.id, :full_name => user.full_name},
-							:membership => {:id => user.membership.id}
+							:membership => {:id => user.membership.id,
+														:card_number => user.membership.card_no,
+														:member_since => user.membership.created_at.strftime('%m/%d/%Y'),
+														:expiration_date => user.membership.expiration_date.strftime('%m/%d/%Y')
+														}
 							},:status => 201
 			return
 		end
