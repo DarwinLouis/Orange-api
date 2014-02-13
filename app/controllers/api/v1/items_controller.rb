@@ -4,6 +4,11 @@ class Api::V1::ItemsController < ApplicationController
 		render :json => Item.all, :status => 200
 	end
 
+	def search
+		items = Item.where(:name => params[:q]).page(params[:page]).per(params[:page_limit])
+		render json: items, meta: {total: Item.count}
+	end
+
 	def create
 
 		item = Item.new

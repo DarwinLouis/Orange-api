@@ -42,7 +42,12 @@ describe Api::V1::ItemsController , :type => :api do
 
 		it "returns error without image" do
 			
-			post "#{url}.json", {:item => {:image => {} ,:name => 'item 1', :point => 100, :branch => 'branch'}}, sign_in_as_a_valid_user
+			post "#{url}.json", {:item => {
+								:image => {} ,
+								:name => 'item 1', 
+								:point => 100, 
+								:branch => 'branch'}
+							}, sign_in_as_a_valid_user
 
 			item = Item.find_by name: 'item 1'
 
@@ -63,6 +68,23 @@ describe Api::V1::ItemsController , :type => :api do
 			result = JSON.parse(last_response.body)
 
 			result['items'].length.should eql(2)
+
+		end
+
+		it "filter items with pagination" do
+
+			5.times { create(:item, image:@image) }
+
+			get "/api/v1/items/search", {:q => "MyString", :page => 1, :page_limit => 5}, sign_in_as_a_valid_user
+
+			last_response.status.should eql(200)
+
+			result = JSON.parse(last_response.body)
+
+			result['items'].length.should eql(5)
+
+			#TODO
+			#please check also the total count for the meta
 
 		end
 
