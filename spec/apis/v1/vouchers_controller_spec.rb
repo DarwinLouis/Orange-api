@@ -43,6 +43,10 @@ describe Api::V1::VouchersController, :type => :api do
 		last_response.body.should eql(expect)
 
 	end
+	
+	
+	#Must add function to fetch all the vouchers converted by the user 
+	
 
 	end
 end
