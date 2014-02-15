@@ -5,8 +5,8 @@ class Api::V1::ItemsController < ApplicationController
 	end
 
 	def search
-		items = Item.where(:name => params[:q]).page(params[:page]).per(params[:page_limit])
-		render json: items, meta: {total: Item.count}
+		items = Branch.where(:name => params[:q]).page(params[:page]).per(params[:page_limit])
+		render json: items, meta: {total: Branch.count}
 	end
 
 	def create
@@ -21,7 +21,7 @@ class Api::V1::ItemsController < ApplicationController
 		item.point = params[:point]
 
 		if item.save
-			render :json => {:item => item}, :status => 201
+			render :json => item, :status => 201
 		else
 			render :json => {:errors => item.errors}, :status => 402
 		end
@@ -36,7 +36,7 @@ class Api::V1::ItemsController < ApplicationController
 		item.point = params[:point]
 		
 		if item.save
-			render :json => {:item => item}, :status => 200
+			render :json => item, :status => 200
 		else
 			render :json => {:errors => item.errors}, :status => 422
 		end
