@@ -17,7 +17,7 @@ class Api::V1::ItemsController < ApplicationController
 
 		item.image = image
 		item.name = params[:name]
-		item.branch = params[:branch]
+		item.branch_id = params[:branch_id]
 		item.point = params[:point]
 
 		if item.save
@@ -32,7 +32,7 @@ class Api::V1::ItemsController < ApplicationController
 
 		item.image = params[:image]
 		item.name = params[:name]
-		item.branch = params[:branch]
+		item.branch_id = params[:branch_id]
 		item.point = params[:point]
 		
 		if item.save
@@ -45,6 +45,6 @@ class Api::V1::ItemsController < ApplicationController
 
 	private
 	def item_param
-		params.required(:item).permit(:image,:name,:point,:branch)
+		params.required(:item).permit(:image,:name,:point,:branch_id)
 	end
 end

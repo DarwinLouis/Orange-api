@@ -12,7 +12,7 @@ describe Api::V1::ItemsController , :type => :api do
 	context "create" do
 		it "successfully save new item" do
 
-			post "#{url}.json", {:image => @image ,:name => 'item 1', :point => 100, :branch => 'branch'}, sign_in_as_a_valid_user
+			post "#{url}.json", {:image => @image ,:name => 'item 1', :point => 100, :branch_id => 1}, sign_in_as_a_valid_user
 
 			item = Item.find_by name: 'item 1'
 
@@ -28,13 +28,13 @@ describe Api::V1::ItemsController , :type => :api do
 
 			item = create(:item, image: @image)
 
-			put "#{url}/#{item.id}.json", {:image => @image ,:name => 'update', :point => 100, :branch => 'branch'}, sign_in_as_a_valid_user
+			put "#{url}/#{item.id}.json", {:image => @image ,:name => 'update', :point => 100, :branch_id => 1}, sign_in_as_a_valid_user
 
 			item = Item.find(item.id)
 
 			item.name.should eql('update')
 			item.point.should eql(100)
-			item.branch.should eql('branch')
+			item.branch_id.should eql(1)
 
 			last_response.status.should eql(200)
 
@@ -46,7 +46,7 @@ describe Api::V1::ItemsController , :type => :api do
 								:image => {} ,
 								:name => 'item 1', 
 								:point => 100, 
-								:branch => 'branch'}
+								:branch_id => 1}
 							}, sign_in_as_a_valid_user
 
 			item = Item.find_by name: 'item 1'

@@ -15,6 +15,6 @@ FactoryGirl.define do
     point 1
     image_path "MyString"
 		image {} 
-		branch 'someBranch'
+		branch_id 1
   end
 end

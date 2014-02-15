@@ -20,7 +20,7 @@ describe Item do
 	end
 
 	it "is invalid without branch" do
-		build(:item, branch: nil).should_not be_valid
+		build(:item, branch_id: nil).should_not be_valid
 	end
 
 end
