@@ -33,5 +33,11 @@ describe Voucher do
 
 	end
 
+	it "return status pending after saving" do
+		voucher = create(:voucher, status: nil)
+
+		voucher.status.should_not eql(nil)
+	end
+
 	end
 end

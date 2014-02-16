@@ -18,7 +18,12 @@ OrangeApi::Application.routes.draw do
 			end
 		end
 
-		resources :vouchers
+		resources :vouchers do
+			collection do
+				post 'claims', :to => "vouchers#claim_voucher"
+			end
+		end
+
 		resources :items do
 			collection do
 				get 'search', :to => 'items#search'

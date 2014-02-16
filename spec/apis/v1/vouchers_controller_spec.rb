@@ -1,5 +1,4 @@
-require 'spec_helper'
-
+require 'spec_helper' 
 describe Api::V1::VouchersController, :type => :api do
 
 	before :each do
@@ -33,14 +32,57 @@ describe Api::V1::VouchersController, :type => :api do
 		
 		@voucher = create(:voucher)
 
-
 		get "#{url + "/#{@voucher.id}"}.json", {}, sign_in_as_a_valid_user
 
-		result = Voucher.find(@voucher.id)
+		voucher = Voucher.find(@voucher.id)
 
-		expect = {:voucher => {:id =>result.id, :claim_code => result.claim_code}}.to_json
+		expect = {:voucher => {
+						:id => voucher.id,
+						:claim_id => voucher.claim_id,
+						:claim_code => voucher.claim_code,
+						:item_id => voucher.item_id,
+						:created_at => voucher.created_at }}.to_json
 
 		last_response.body.should eql(expect)
+
+	end
+
+	it "successfully claim voucher" do
+
+		voucher = create(:voucher)
+
+		post "#{url}/claims", {:voucher => {:claim_code => voucher.claim_code}}, sign_in_as_a_valid_user
+
+		last_response.status.should eql(200)
+
+		result = Voucher.find_by claim_code: voucher.claim_code
+
+		result.status.should eql("closed")
+
+	end
+
+	it "return error if voucher not found" do
+		voucher = create(:voucher)
+
+		post "#{url}/claims", {:claim_code => 'yyy'}, sign_in_as_a_valid_user
+
+		result = Voucher.find_by claim_code: voucher.claim_code
+
+		result = JSON.parse(last_response.body)
+
+		result['errors'].should eql('Voucher not found')
+
+	end
+
+	it "return all closed voucherd" do
+
+		2.times {create(:voucher, status:'closed')}
+
+		get "#{url}", {:status => 'closed'}, sign_in_as_a_valid_user
+
+		result = JSON.parse(last_response.body)
+
+		result['vouchers'].count.should eql(2)
 
 	end
 

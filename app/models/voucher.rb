@@ -1,9 +1,12 @@
 class Voucher < ActiveRecord::Base
 
-
 	before_save :insure_claim_code, :generate_expiration_date
 
 	validates_presence_of :user_id, :item_id, :claim_id
+
+	def default_status
+		self.status = 'pending'
+	end
 
 	def insure_claim_code
 		if claim_code.blank?
@@ -20,6 +23,11 @@ class Voucher < ActiveRecord::Base
 	
 	def generate_expiration_date
 		self.expiration_date = DateTime.now + 1.month
+	end
+
+	def close_voucher
+		self.status = "closed"
+		self.save!
 	end
 
 end

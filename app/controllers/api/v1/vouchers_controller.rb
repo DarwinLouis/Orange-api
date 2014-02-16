@@ -1,8 +1,25 @@
 class Api::V1::VouchersController < ApplicationController 
 
+	def index
+		render :json =>Voucher.where(:status => params[:status])
+	end
+
 	def show 
-		@voucher = Voucher.find(params[:id])
-		render :json => @voucher 
+		render :json => Voucher.find(params[:id])
+	end
+
+	def claim_voucher
+
+			voucher = Voucher.find_by_claim_code(params[:voucher][:claim_code])
+
+			return voucher_not_found unless voucher
+
+			if voucher.close_voucher 
+				render :json =>	voucher, :status => 200
+			else
+				render :json => {:error => voucher.errors}, :status => 422
+			end
+
 	end
 
 	def create
@@ -18,6 +35,11 @@ class Api::V1::VouchersController < ApplicationController
 		else
 			render :json => {:errors => voucher.errors}, :status => 402
 		end
+	end
+
+	protected
+	def voucher_not_found
+		render :json => {:errors => 'Voucher not found'}, :status => 422
 	end
 
 	private
