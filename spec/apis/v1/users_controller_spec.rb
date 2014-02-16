@@ -66,6 +66,6 @@ describe Api::V1::UsersController, :type => :api do
 			last_response.status.should eql(201)
 
 		end
-		
+
 	end
 end

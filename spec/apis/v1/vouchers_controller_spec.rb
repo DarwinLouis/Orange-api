@@ -41,7 +41,9 @@ describe Api::V1::VouchersController, :type => :api do
 						:claim_id => voucher.claim_id,
 						:claim_code => voucher.claim_code,
 						:item_id => voucher.item_id,
-						:created_at => voucher.created_at }}.to_json
+						:created_at => voucher.created_at,
+						:updated_at => voucher.updated_at, 
+						:status => voucher.status }}.to_json
 
 		last_response.body.should eql(expect)
 
@@ -74,11 +76,23 @@ describe Api::V1::VouchersController, :type => :api do
 
 	end
 
-	it "return all closed voucherd" do
+	it "return all closed voucher" do
 
 		2.times {create(:voucher, status:'closed')}
 
 		get "#{url}", {:status => 'closed'}, sign_in_as_a_valid_user
+
+		result = JSON.parse(last_response.body)
+
+		result['vouchers'].count.should eql(2)
+
+	end
+
+	it "return all voucher by user" do
+
+		2.times {create(:voucher, status:'closed')}
+
+		get "#{url}", {:user_id => 1}, sign_in_as_a_valid_user
 
 		result = JSON.parse(last_response.body)
 

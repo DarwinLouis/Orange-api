@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Voucher do
 	
-	context "Voucher Creation" do
+	context "Creation" do
 
 	let(:voucher) { create(:voucher) }
 
@@ -33,11 +33,7 @@ describe Voucher do
 
 	end
 
-	it "return status pending after saving" do
-		voucher = create(:voucher, status: nil)
-
-		voucher.status.should_not eql(nil)
-	end
+	it "return status pending after saving"
 
 	end
 end
