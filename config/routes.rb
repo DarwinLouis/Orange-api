@@ -10,6 +10,7 @@ OrangeApi::Application.routes.draw do
 			put 'registrations' => 'users#update', :as => 'update_register'
 			get 'registrations/:id' => 'users#show', :as => 'user'
 			delete 'sessions' => 'sessions#destroy', :as => 'logout'
+			get 'users' => 'users#index'
 		end
 		resources :passwords, only: [:put,:post] do
 			collection do 

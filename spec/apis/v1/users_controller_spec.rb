@@ -11,7 +11,7 @@ describe Api::V1::UsersController, :type => :api do
 	context "update" do
 		let(:url) {"/api/v1/registrations"}
 		
-		it "successfully update" do
+		it "successfully" do
 
 			param = {
 						:id => @user.id,
@@ -50,7 +50,7 @@ describe Api::V1::UsersController, :type => :api do
 
 			get "#{url + '/' + "#{user.id}"}.json", {}, sign_in_as_a_valid_user
 
-			expect = {:success => true, :user=> {:id => user.id, 
+			expect = {:user=> {:id => user.id, 
 												:full_name => user.full_name,
 												:address => user.address,
 												:birth_date => user.birth_date,
@@ -61,10 +61,26 @@ describe Api::V1::UsersController, :type => :api do
 
 			result = last_response.body
 
+
 			result.should eql(expect.to_json)
 
 			last_response.status.should eql(201)
 
+		end
+
+		it "return all cms user " do
+			
+			2.times { create(:user, old_card_no: 'CMS') }
+
+			get "/api/v1/users", {} , sign_in_as_a_valid_user
+
+			expect = JSON.parse(last_response.body)
+
+			puts expect
+
+			expect['users'].length.should eql(2)
+			last_response.status.should eql(200)
+			
 		end
 
 	end
